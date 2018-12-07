@@ -2,7 +2,29 @@ const ordersModel = require('../models/order');
 
 const ordersController = {
   getAll: (req, res, next) => {
-    ordersModel.find({}).populate('dishes.dish').exec((err, orders) => {
+    ordersModel.find({}).populate('dishes.dish').populate('customer').exec((err, orders) => {
+      if (err) return res.json(err);
+
+
+      const orderWithTotalPrice = orders.map(order => {
+        let totalPrice = 0;
+
+        order.dishes.forEach(dish => {
+          totalPrice += dish.dish.price * dish.quantity;
+        });
+        const dishInfo = {
+          dishDetails: order,
+          totalPrice: totalPrice
+        }
+        return dishInfo;
+      });
+
+      res.json(orderWithTotalPrice);
+    });
+  },
+
+  getByUserId: (req, res, next) => {
+    ordersModel.find({customer: req.params.userId}).populate('dishes.dish').populate('customer').exec((err, orders) => {
       if (err) return res.json(err);
 
 

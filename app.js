@@ -11,7 +11,7 @@ const routes = require('./routes/index');
 // eslint-disable-next-line no-unused-vars
 const authenticateCtrl = require('./controller/authCtrl');
 const cors = require('cors');
-
+const PORT = process.env.PORT || 5000;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -41,6 +41,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-//app.listen(3000);
+app.listen(PORT);
 
-module.exports = app;
+// module.exports = app;

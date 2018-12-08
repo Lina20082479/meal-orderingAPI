@@ -8,7 +8,7 @@
     "prebuild": "npm-run-all test clean",
     "build": "babel ./ --out-dir lib/ --ignore ./node_modules,./.babelrc,./package.json,./package-lock.json,./test --copy-files",
     "server": "cross-env NODE_ENV=dev PORT=3000 node lib/bin/www",
-    "start": "npm run server",
+    "start": "node app.js",
     "clean": "rimraf ./lib && mkdir lib",
     "server:watch": "cross-env NODE_ENV=dev nodemon --exec babel-node bin/www",
     "test:watch": "npm run test -- --watch",

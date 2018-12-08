@@ -1,13 +1,15 @@
-/eslint no-unused-vars: "off" /;
-//const createError = require('http-errors');
+// eslint-disable-next-line no-unused-vars
+const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-//const database = require('./database');
+// eslint-disable-next-line no-unused-vars
+const database = require('./database');
 const app = express();
 const routes = require('./routes/index');
-//const authenticateCtrl = require('./controller/authCtrl');
+// eslint-disable-next-line no-unused-vars
+const authenticateCtrl = require('./controller/authCtrl');
 const cors = require('cors');
 
 // view engine setup
@@ -27,8 +29,9 @@ app.use(cors());
 routes(app);
 
 // error handler
-app.use(function(err, req, res) {
-// set locals, only providing error in development
+// eslint-disable-next-line no-unused-vars
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 

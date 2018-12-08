@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars 
+// eslint-disable-next-line no-unused-vars
 var app = require('../../app'); 
 let Dishes = require('../../models/dish');
 let chai = require('chai');
@@ -17,7 +17,8 @@ describe('Dish', function (){
             description : 'chicken breast,mushroom,egg,garlic,onions',
             price: 8
         });
-        dishes.save(function(){
+        // eslint-disable-next-line no-unused-vars
+        dishes.save(function(err){
             done();
         });
     });
@@ -105,7 +106,7 @@ describe('Dish', function (){
                         expect(res.body.length).to.equal(2);
                         let result = _.map(res.body, (dish) => {
                             return { name: dish.name,
-                                price: dish.price };
+                                price: dish.price }; 
                         });
                         expect(result).to.include[{ name:'Crispy Crab Meat Roll', price: 6 } ];
                         Dishes.collection.drop();
@@ -200,7 +201,7 @@ describe('Dish', function (){
                     expect(res).to.have.status(200);
                     let result = _.map(res.body, (dish) => {
                         return { name: dish.name,
-                            price: dish.price };
+                            price: dish.price }; 
                     });
                     expect(result).to.include[ {name:'chicken & mushroom soup', price: 8 } ];
                     done();

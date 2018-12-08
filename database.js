@@ -10,7 +10,7 @@ autoIncrement.initialize(mongoose.connection);
 mongoose.connection.on('connected', function () {
     console.log('DB is connected');
 });
-
+// eslint-disable-next-line no-unused-vars
 mongoose.connection.on('error', function (err) {
     console.log('DB is failed');
 });

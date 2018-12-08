@@ -2,6 +2,7 @@ const usersModel = require('./../models/user');
 const jwt = require('jsonwebtoken');
 
 const authController = {
+    // eslint-disable-next-line no-unused-vars 
     login: (req, res, next) => {
         const credential = req.body;
         usersModel.findOne({email: credential.email, password: credential.password}, (err, user) => {
@@ -13,31 +14,32 @@ const authController = {
                     isAdmin: user.isAdmin,
                     last_name: user.last_name
                 }, 'Waterford');
-                res.json({token})
+                res.json({token});
             } else {
-                res.json("email or password incorrect!")
+                res.json('email or password incorrect!');
             }
         });
     },
-
+    // eslint-disable-next-line no-unused-vars 
     register: (req, res, next) => {
         let user = new usersModel(req.body);
         user.save(req.body, function (err, user) {
             if (err) return res.json(err);
-            res.json(user)
-        })
+            res.json(user);
+        });
     },
 
     authenticate: (req, res, next) => {
-      const token = req.headers['authorization'];
-      jwt.verify(token, 'Waterford', (err, decode) => {
-          if (err) {
-              res.json("Token not provided")
-          } else {
-              next()
-          }
-      });
-  }
+        const token = req.headers['authorization'];
+        // eslint-disable-next-line no-unused-vars 
+        jwt.verify(token, 'Waterford', (err, decode) => {
+            if (err) {
+                res.json('Token not provided');
+            } else {
+                next();
+            }
+        });
+    }
 };
 
 module.exports = authController;

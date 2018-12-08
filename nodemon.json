@@ -1,0 +1,3 @@
+{
+    "watch": [ "app.js", "datebase.js","models/","routes/","controller/" ,"bin/www" ]
+  }

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars 
 var app = require('../../app'); 
 let Users = require('../../models/user');
 let chai = require('chai');
@@ -24,49 +25,49 @@ describe('Authentication', function (){
     //        });
     //    });
         it('should register successfully and create a new user', function(done) {
-          let user = { 
-               email:'123456@gmail.ie',
-               password:'123456'
-           };
-          chai.request(server)
-            .post('/register')
-            .send(user)
-            .end(function(err, res) {
-              expect(res).to.have.status(200);
-              done();
-            });
+            let user = { 
+                email:'123456@gmail.ie',
+                password:'123456'
+            };
+            chai.request(server)
+                .post('/register')
+                .send(user)
+                .end(function(err, res) {
+                    expect(res).to.have.status(200);
+                    done();
+                });
         });
         after(function  (done) {
-          chai.request(server)
-            .get('/users')
-            .end(function(err, res) {
-                expect(res).to.have.status(200);
-                expect(res.body).to.be.a('array');
-                expect(res.body.length).to.equal(2);
-                let result = _.map(res.body, (user) => {
-                    return { email: user.email ,
-                        password:user.password} 
+            chai.request(server)
+                .get('/users')
+                .end(function(err, res) {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.a('array');
+                    expect(res.body.length).to.equal(2);
+                    let result = _.map(res.body, (user) => {
+                        return { email: user.email ,
+                            password:user.password}; 
                     });
-                  expect(result).to.include[ { email:'123456@gmail.ie', password:'123456'} ];
-                  done();
-            });
+                    expect(result).to.include[ { email:'123456@gmail.ie', password:'123456'} ];
+                    done();
+                });
         }); 
     });
     describe('POST /login', function () {
         describe('when user is valid',function() {
             it('should login successfully and give a token', function(done) {
                 chai.request(server)
-                .get('/users')
-                .end(function(err, res) {
-                    const user = res.body[0];
-                    chai.request(server)
-                    .post('/login')
-                    .send(user)
+                    .get('/users')
                     .end(function(err, res) {
-                        expect(res.body.token.length > 0).to.be.true;
-                        done();
-                    });   
-                });
+                        const user = res.body[0];
+                        chai.request(server)
+                            .post('/login')
+                            .send(user)
+                            .end(function(err, res) {
+                                expect(res.body.token.length > 0).to.be.true;
+                                done();
+                            });   
+                    });
             });
         });
         // describe('when user is invalid',function() {

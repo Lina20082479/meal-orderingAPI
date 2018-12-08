@@ -3,17 +3,18 @@ let orderRoute = require('./order');
 let dishRoute = require('./dish');
 
 let routes = (route) => {
-  route.get('/', function(req, res, next) {
-    res.render('index', { title: 'Online Meal Ordering' });
-  });
+    // eslint-disable-next-line no-unused-vars
+    route.get('/', function(req, res) {
+        res.render('index', { title: 'Online Meal Ordering' });
+    });
 
 
-  userRoute(route);
+    userRoute(route);
 
-  orderRoute(route);
+    orderRoute(route);
 
-  dishRoute(route);
-}
+    dishRoute(route);
+};
 
 
 module.exports = routes;

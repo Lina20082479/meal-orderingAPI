@@ -3,15 +3,15 @@ let orderCtrl = require('../controller/orderCtrl');
 const routes = (route) =>{
     route.route('/orders')
         .post(orderCtrl.create)
-        .get(orderCtrl.getAll)
+        .get(orderCtrl.getAll);
 
     route.route('/orders/:id')
         .get(orderCtrl.getOne)
         .put(orderCtrl.update)
-        .delete(orderCtrl.delete)
+        .delete(orderCtrl.delete);
 
     route.route('/orders-search/:userId')
-        .get(orderCtrl.getByUserId)
-}
+        .get(orderCtrl.getByUserId);
+};
 
 module.exports = routes;

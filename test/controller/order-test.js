@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars 
 var app = require('../../app'); 
 let Orders = require('../../models/order');
 let Users = require('../../models/user');
@@ -8,24 +9,27 @@ let server = require('../../bin/www');
 let expect = chai.expect;
 
 chai.use(chaiHttp);
+// eslint-disable-next-line no-unused-vars 
 let _ = require('lodash');
 chai.use(require('chai-things'));
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyMzQ1NkBnbWFpbC5pZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NDEyMzg4MTZ9.sxkDtrXmml4b_qrie9MSoigsQ9sDR8-ZJI_vOvDd4W4"
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyMzQ1NkBnbWFpbC5pZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NDEyMzg4MTZ9.sxkDtrXmml4b_qrie9MSoigsQ9sDR8-ZJI_vOvDd4W4';
 
 
 describe('Order', function () {
     before(function (done) {
         var users = new Users({
-            email: "12345@gmail.ie",
-            password: "12345"
+            email: '12345@gmail.ie',
+            password: '12345'
         });
+        // eslint-disable-next-line no-unused-vars 
         users.save(function (err) {
             var dishes = new Dishes({
-                name: "chicken & mushroom soup",
-                category: "soup",
-                description: "chicken breast,mushroom,egg,garlic,onions",
+                name: 'chicken & mushroom soup',
+                category: 'soup',
+                description: 'chicken breast,mushroom,egg,garlic,onions',
                 price: 8
             });
+            // eslint-disable-next-line no-unused-vars 
             dishes.save(function (err) {
                 done();
             });
@@ -56,6 +60,7 @@ describe('Order', function () {
                             }
                         ]
                     });
+                    // eslint-disable-next-line no-unused-vars 
                     orders.save(function (err, order) {
                         done();
                     });
@@ -91,13 +96,13 @@ describe('Order', function () {
                                 }
                             ]
                         };
-                       chai.request(server)
-                           .post('/orders')
-                           .set('Authorization', token)
-                           .send(order)
-                           .end((err, res) => {
-                               expect(res).to.have.status(200);
-                               done();
+                        chai.request(server)
+                            .post('/orders')
+                            .set('Authorization', token)
+                            .send(order)
+                            .end((err, res) => {
+                                expect(res).to.have.status(200);
+                                done();
                             });
                     });
                 });
@@ -122,13 +127,13 @@ describe('Order', function () {
                     .end(function(err, res) {
                         const orderId = res.body[0].dishDetails._id;
                         chai.request(server)
-                        .delete('/orders/'+ orderId)
-                        .set('Authorization', token)
-                        .end(function(err, res) {
-                            expect(res).to.have.status(200);
-                            expect(res.body).to.equal(true);
-                            done();
-                        });
+                            .delete('/orders/'+ orderId)
+                            .set('Authorization', token)
+                            .end(function(err, res) {
+                                expect(res).to.have.status(200);
+                                expect(res.body).to.equal(true);
+                                done();
+                            });
                     }); 
             }); 
             after(function  (done) {
@@ -144,19 +149,19 @@ describe('Order', function () {
         });
         describe('GET /orders/:id', function () {
             it('should return the order by id', function(done) {
-               chai.request(server)
-                .get('/orders')
-                .set('Authorization', token)
-                .end(function(err, res) {
-                 const orderId = res.body[0].dishDetails._id;
-                  chai.request(server)
-                  .get('/orders/' + orderId)
-                  .set('Authorization', token)
-                  .end(function(err, res) {
-                      expect(res).to.have.status(200);
-                      done();
-                  });
-                });
+                chai.request(server)
+                    .get('/orders')
+                    .set('Authorization', token)
+                    .end(function(err, res) {
+                        const orderId = res.body[0].dishDetails._id;
+                        chai.request(server)
+                            .get('/orders/' + orderId)
+                            .set('Authorization', token)
+                            .end(function(err, res) {
+                                expect(res).to.have.status(200);
+                                done();
+                            });
+                    });
             });
             after(function (done) {
                 Orders.collection.drop();
@@ -172,20 +177,20 @@ describe('Order', function () {
                         }
                     ]
                 };
-               chai.request(server)
-                .get('/orders')
-                .set('Authorization', token)
-                .end(function(err, res){
-                    const orderId = res.body[0].dishDetails._id;
-                    chai.request(server)
-                    .put('/orders/' + orderId)
-                    .send(order)
+                chai.request(server)
+                    .get('/orders')
                     .set('Authorization', token)
-                    .end(function(err, res) {
-                        expect(res).to.have.status(200);
-                        done();
+                    .end(function(err, res){
+                        const orderId = res.body[0].dishDetails._id;
+                        chai.request(server)
+                            .put('/orders/' + orderId)
+                            .send(order)
+                            .set('Authorization', token)
+                            .end(function(err, res) {
+                                expect(res).to.have.status(200);
+                                done();
+                            });
                     });
-                });
             });
             after(function (done) {
                 Orders.collection.drop();
@@ -196,8 +201,8 @@ describe('Order', function () {
     after(function (done) {
         Users.collection.drop();
         Dishes.collection.drop();
-       done();
-   });
+        done();
+    });
 });
 
 

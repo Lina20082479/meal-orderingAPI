@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars 
 var app = require('../../app'); 
 let Users = require('../../models/user');
 let chai = require('chai');
@@ -11,28 +12,29 @@ chai.use(require('chai-things'));
 describe('User', function (){
     beforeEach(function(done){  
         var users = new Users({
-            email: "12345@gmail.ie",
-            password: "12345"
+            email: '12345@gmail.ie',
+            password: '12345'
         });
+        // eslint-disable-next-line no-unused-vars 
         users.save(function(err){
-                done();
+            done();
         });
     });
     describe('GET /users',  () => {
         it('should return all users in an array', function(done) {
             chai.request(server)
-              .get('/users')
-              .end(function(err, res) {
-                expect(res).to.have.status(200);
-                expect(res.body).to.be.a('array');
-                expect(res.body.length).to.equal(2);
-                let result = _.map(res.body, (user) => {
-                    return { email: user.email,
-                    password : user.password } 
+                .get('/users')
+                .end(function(err, res) {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.a('array');
+                    expect(res.body.length).to.equal(2);
+                    let result = _.map(res.body, (user) => {
+                        return { email: user.email,
+                            password : user.password };
+                    });
+                    expect(result).to.include[ {  email:'12345@gmail.ie', password:'12345'} ];
+                    done();
                 });
-               expect(result).to.include[ {  email:'12345@gmail.ie', password:'12345'} ];
-               done();
-            });
         });
         after(function  (done) {
             Users.collection.drop();
@@ -42,18 +44,18 @@ describe('User', function (){
     
     describe('GET /users/:id', function () {
         it('should return the user by id', function(done) {
-           chai.request(server)
-            .get('/users')
-            .end(function(err, res) {
-             const userId = res.body[0]._id;
-              chai.request(server)
-              .get('/users/' + userId)
-              .end(function(err, res) {
-                  expect(res).to.have.status(200);
-                  expect(res.body.email).to.eql('12345@gmail.ie');
-                  done();
-              });
-            });
+            chai.request(server)
+                .get('/users')
+                .end(function(err, res) {
+                    const userId = res.body[0]._id;
+                    chai.request(server)
+                        .get('/users/' + userId)
+                        .end(function(err, res) {
+                            expect(res).to.have.status(200);
+                            expect(res.body.email).to.eql('12345@gmail.ie');
+                            done();
+                        });
+                });
         });
         after(function  (done) {
             Users.collection.drop();
@@ -86,27 +88,27 @@ describe('User', function (){
                     password:'12345678'
                 };
                 chai.request(server)
-                .post('/users')
-                .send(user)
-                .end(function(err, res) {
-                    expect(res).to.have.status(200);
-                    done();
-                });
+                    .post('/users')
+                    .send(user)
+                    .end(function(err, res) {
+                        expect(res).to.have.status(200);
+                        done();
+                    });
             });
             after(function  (done) {
                 chai.request(server)
-                .get('/users')
-                .end(function(err, res) {
-                    expect(res.body).to.be.a('array');
-                    expect(res.body.length).to.equal(2);
-                    let result = _.map(res.body, (user) => {
-                        return { email: user.email ,
-                            password:user.password} 
+                    .get('/users')
+                    .end(function(err, res) {
+                        expect(res.body).to.be.a('array');
+                        expect(res.body.length).to.equal(2);
+                        let result = _.map(res.body, (user) => {
+                            return { email: user.email ,
+                                password:user.password};
+                        });
+                        expect(result).to.include[ { email:'12345678@gmail.ie', password:'12345678'} ];
+                        Users.collection.drop();
+                        done();
                     });
-                    expect(result).to.include[ { email:'12345678@gmail.ie', password:'12345678'} ];
-                    Users.collection.drop();
-                    done();
-                });
             }); 
         });
     });
@@ -115,29 +117,29 @@ describe('User', function (){
             chai.request(server)
                 .get('/users')
                 .end(function(err, res) {
-                const userId = res.body[0]._id;
-                chai.request(server)
-                  .delete('/users/' + userId )
-                  .end(function(err, res) {
-                      expect(res).to.have.status(200);
-                      expect(res.body).to.equal(true); 
-                      done();
-                   }); 
+                    const userId = res.body[0]._id;
+                    chai.request(server)
+                        .delete('/users/' + userId )
+                        .end(function(err, res) {
+                            expect(res).to.have.status(200);
+                            expect(res.body).to.equal(true); 
+                            done();
+                        }); 
                 }); 
         }); 
         after(function  (done) {
-           chai.request(server)
-               .get('/users')
-               .end(function(err, res) {
-                   expect(res).to.have.status(200);
-                   expect(res.body).to.be.a('array');
-                   expect(res.body.length).to.equal(0);
-                   let result = _.map(res.body, (user) => {
-                       return { email: user.email ,
-                        password:user.password} 
+            chai.request(server)
+                .get('/users')
+                .end(function(err, res) {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.a('array');
+                    expect(res.body.length).to.equal(0);
+                    let result = _.map(res.body, (user) => {
+                        return { email: user.email ,
+                            password:user.password}; 
                     });
-                   expect(result).to.not.include( { email:'12345@gmail.ie', password:'12345' } );
-                   done();
+                    expect(result).to.not.include( { email:'12345@gmail.ie', password:'12345' } );
+                    done();
                 });
         });
     });
@@ -148,12 +150,12 @@ describe('User', function (){
                     password: 123456
                 };
                 chai.request(server)
-                .put('/users/wrong_id')
-                .send(user)
-                .end(function(err, res) {
-                   expect(res).to.have.status(404);
-                   done();
-                });
+                    .put('/users/wrong_id')
+                    .send(user)
+                    .end(function(err, res) {
+                        expect(res).to.have.status(404);
+                        done();
+                    });
             });
             after(function  (done) {
                 Users.collection.drop();
@@ -166,23 +168,23 @@ describe('User', function (){
                     password: 123456
                 };
                 chai.request(server)
-                .get('/users')
-                .end(function(err, res){
-                    const userId = res.body[0]._id;
-                    chai.request(server)
-                    .put('/users/' + userId)
-                    .send(user)
-                    .end(function(err, res) {
-                        expect(res).to.have.status(200);
-                        expect(res.body).to.include( { email:'12345@gmail.ie', password:'123456'} );
-                        done();
+                    .get('/users')
+                    .end(function(err, res){
+                        const userId = res.body[0]._id;
+                        chai.request(server)
+                            .put('/users/' + userId)
+                            .send(user)
+                            .end(function(err, res) {
+                                expect(res).to.have.status(200);
+                                expect(res.body).to.include( { email:'12345@gmail.ie', password:'123456'} );
+                                done();
+                            });
                     });
-                });
             });
-           after(function  (done) {
-               Users.collection.drop();
-               done();
-           });
+            after(function  (done) {
+                Users.collection.drop();
+                done();
+            });
         });
     });
 });

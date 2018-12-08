@@ -43,4 +43,4 @@ app.use(function(err, req, res, next) {
 
 app.listen(PORT);
 
-// module.exports = app;
+module.exports = app;

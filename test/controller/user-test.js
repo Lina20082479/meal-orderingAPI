@@ -27,7 +27,7 @@ describe('User', function (){
                 .end(function(err, res) {
                     expect(res).to.have.status(200);
                     expect(res.body).to.be.a('array');
-                    expect(res.body.length).to.equal(2);
+                    expect(res.body.length).to.equal(1);
                     let result = _.map(res.body, (user) => {
                         return { email: user.email,
                             password : user.password };

@@ -1,14 +1,14 @@
 // eslint-disable-next-line no-unused-vars
-var app = require('../../app');
-let Users = require('../../models/user');
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../../bin/www');
-let expect = chai.expect;
-
-chai.use(chaiHttp);
-let _ = require('lodash' );
-chai.use(require('chai-things'));
+// var app = require('../../app');
+// let Users = require('../../models/user');
+// let chai = require('chai');
+// let chaiHttp = require('chai-http');
+// let server = require('../../bin/www');
+// let expect = chai.expect;
+//
+// chai.use(chaiHttp);
+// let _ = require('lodash' );
+// chai.use(require('chai-things'));
 
 // describe('Authentication', function (){
 //     describe('POST /register', function () {

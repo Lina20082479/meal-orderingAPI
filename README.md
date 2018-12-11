@@ -35,13 +35,12 @@ The application is designed for users to order their meal online. Customers can 
 
 https://travis-ci.org/Lina20082479/meal-orderingAPI
 
+ 
 
-
-. . . URL of published test coverage results on Coveralls, e.g.  
-
-https://coveralls.io/github/diarmuidoconnor/donationsAPI
+https://coveralls.io/github/Lina20082479/meal-orderingAPI
 
 
 ## Extra features.
 Create an administrator to manage the dish menu.
 Deploy to Heroku : https://meal-ordering-wit.herokuapp.com
+gitHub link: https://github.com/Lina20082479/meal-orderingAPI
